@@ -5,7 +5,7 @@ from enum import IntEnum
 # Const
 LINES = 6
 COLS = 20
-VERSION = "0.5.1"
+VERSION = "0.6.0"
 
 class D(IntEnum):
     NONE = 0
@@ -14,7 +14,6 @@ class D(IntEnum):
     LEFT = 3
     RIGHT = 4
 
-road1 = 
 
 # Globals
 lh=sh=sw=fw=cw = 0
@@ -39,6 +38,13 @@ def move_frog(_fx:int, _fy:int, dir:int) -> tuple[int, int]:
             pass
     
     return _fx, _fy
+    
+def move_car(_vx: int, _vy:int, _dir:int, _speed:int) -> tuple[int, int]:
+    if _dir == D.RIGHT:
+        _vx += _speed
+    else:
+        _vx -= _speed
+    return _vx, _vy
 
 def event_manager() -> tuple[bool, int]:
     # default values
@@ -112,6 +118,25 @@ cw = int(sw / COLS)
 fy = sh-fh
 fx = int(cw * (COLS / 2 - 1))
 
+
+#### car
+car = pygame.image.load("./img/Car.png").convert_alpha()
+
+# scale car
+caw = car.get_width()
+cah = car.get_height()
+
+r = (sh / LINES) / cah
+car = pygame.transform.smoothscale(car, (caw*r, cah * r))
+
+# get new car size
+caw = car.get_width()
+cah = car.get_height()
+
+# place car on the left of the first road (second line) area
+cx = -10
+cy = lh*2
+
 # Start main loop
 running = True
 dir = D.NONE
@@ -127,6 +152,7 @@ while running:
     # display background and frog
     screen.blit(background, (0, 0))
     screen.blit(frog, (fx, fy))
+    screen.blit(car, (cx, cy))
     pygame.display.flip()
 
 # End of the main loop

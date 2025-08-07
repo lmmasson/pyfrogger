@@ -183,9 +183,21 @@ Nous voulons que les routes aient chacune:
 6.1: un véhicule
 ------
 Nous allons afficher un véhicule se déplaçant sur une route.
-il faut donc charger une image de véhicule à la bonne dimension et receuillir ses nouvelles tailles.
-Stocker ses coordonnées.
-l'afficher à ses coordonnées dans la boucle principale
+a. il faut donc charger une image de véhicule
+b. il faut redimensionner l'image à la hauteur d'une ligne en conservant l'aspect de l'image.
+c. Stocker ses coordonnées dans vx et vy
+d. l'afficher aux coordonnées vx et vy dans la boucle principale
+
+6.2: deplacement d'un véhicule
+------
+
+Nous allons créer une fonction qui va déplacer notre véhicule.
+Pour cela, nous allons:
+a. créer une fonction move_car qui prend en entrée:
+- vx
+- vy
+- la direction D.RIGHT ou D.LEFT
+- la vitesse (un entier)
 
 6.?: Utiliser un Dict pour définir la route.
 -------
