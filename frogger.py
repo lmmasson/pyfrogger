@@ -5,7 +5,7 @@ from enum import IntEnum
 # Const
 LINES = 6
 COLS = 20
-VERSION = "0.5.0"
+VERSION = "0.5.1"
 
 class D(IntEnum):
     NONE = 0
@@ -14,6 +14,7 @@ class D(IntEnum):
     LEFT = 3
     RIGHT = 4
 
+road1 = 
 
 # Globals
 lh=sh=sw=fw=cw = 0
@@ -115,16 +116,19 @@ fx = int(cw * (COLS / 2 - 1))
 running = True
 dir = D.NONE
 
+
+# Main loop
 while running:
+    # poll for events
+    running, dir = event_manager()
+    # compute new frog coordinates
+    fx, fy = move_frog(fx, fy, dir)
+    
     # display background and frog
     screen.blit(background, (0, 0))
     screen.blit(frog, (fx, fy))
-    
-    # poll for events
-    running, dir = event_manager()
-    fx, fy = move_frog(fx, fy, dir)
-
     pygame.display.flip()
 
+# End of the main loop
 pygame.quit()
 exit(0)
