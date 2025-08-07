@@ -1,11 +1,12 @@
 import pygame
 from enum import IntEnum
+from time import sleep
 
 
 # Const
 LINES = 6
 COLS = 20
-VERSION = "0.6.0"
+VERSION = "0.6.3"
 
 class D(IntEnum):
     NONE = 0
@@ -39,12 +40,13 @@ def move_frog(_fx:int, _fy:int, dir:int) -> tuple[int, int]:
     
     return _fx, _fy
     
-def move_car(_vx: int, _vy:int, _dir:int, _speed:int) -> tuple[int, int]:
-    if _dir == D.RIGHT:
-        _vx += _speed
+#def move_car(_vx: int, _vy:int, _dir:int, _speed:int) -> tuple[int, int]:
+def move_car(_v) -> int:
+    if _v["direction"] == D.RIGHT:
+        _v["x"] += _v["speed"]
     else:
-        _vx -= _speed
-    return _vx, _vy
+        _v["x"] -= _v["speed"]
+    return _v["x"]
 
 def event_manager() -> tuple[bool, int]:
     # default values
@@ -80,6 +82,7 @@ def event_manager() -> tuple[bool, int]:
 # init
 pygame.init()
 screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+clock = pygame.time.Clock()
 
 # debug
 WHITE = (255, 255, 255)
@@ -119,23 +122,23 @@ fy = sh-fh
 fx = int(cw * (COLS / 2 - 1))
 
 
-#### car
-car = pygame.image.load("./img/Car.png").convert_alpha()
-
+#### vehicle
+sprite1=pygame.image.load("./img/Car.png").convert_alpha()
 # scale car
-caw = car.get_width()
-cah = car.get_height()
+vw = sprite1.get_width()
+vh = sprite1.get_height()
+r = (sh / LINES) / vh
+sprite1 = pygame.transform.smoothscale(sprite1, (vw*r, vh * r))
 
-r = (sh / LINES) / cah
-car = pygame.transform.smoothscale(car, (caw*r, cah * r))
+vehicle = {
+    "sprite" : sprite1,
+    "width" : sprite1.get_width(),
+    "x" : 0,
+    "line" : 2,
+    "direction" : D.RIGHT,
+    "speed" : 10,
+}
 
-# get new car size
-caw = car.get_width()
-cah = car.get_height()
-
-# place car on the left of the first road (second line) area
-cx = -10
-cy = lh*2
 
 # Start main loop
 running = True
@@ -148,12 +151,14 @@ while running:
     running, dir = event_manager()
     # compute new frog coordinates
     fx, fy = move_frog(fx, fy, dir)
+    vehicle["x"] = move_car(vehicle)
     
     # display background and frog
     screen.blit(background, (0, 0))
     screen.blit(frog, (fx, fy))
-    screen.blit(car, (cx, cy))
+    screen.blit(vehicle["sprite"], (vehicle["x"], vehicle["line"] * lh))
     pygame.display.flip()
+    clock.tick(25)
 
 # End of the main loop
 pygame.quit()

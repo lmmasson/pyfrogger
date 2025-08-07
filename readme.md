@@ -188,9 +188,8 @@ b. il faut redimensionner l'image à la hauteur d'une ligne en conservant l'aspe
 c. Stocker ses coordonnées dans vx et vy
 d. l'afficher aux coordonnées vx et vy dans la boucle principale
 
-6.2: deplacement d'un véhicule
+6.2: déplacement d'un véhicule
 ------
-
 Nous allons créer une fonction qui va déplacer notre véhicule.
 Pour cela, nous allons:
 a. créer une fonction move_car qui prend en entrée:
@@ -198,6 +197,45 @@ a. créer une fonction move_car qui prend en entrée:
 - vy
 - la direction D.RIGHT ou D.LEFT
 - la vitesse (un entier)
+et qui renvoie les nouvelles coordonnées vx et vy après mise à jour.
+Si direction vaut D.RIGHT, alors on augmente vx de vitesse
+
+b. dans la boucle principale, on appelle move_car et on réassigne vx et vy
+c. dans la boucle principale, on affiche le sprite du vehicule
+
+6.3: Représentation d'un véhicule
+-------
+A l'heure actuelle, un véhicule est représenté par plusieurs variables.
+Le sprite du véhicule, les coordonnées vx et vy, sa vitesse et sa direction.
+Il y a également la ligne sur laquelle le véhicule se déplace.
+
+Dans le jeu, il faudra plusieurs véhicules.
+Pour simplifier la gestion d'un véhicule, nous allons regrouper en une seule variable tous les éléments qui le représente.
+Nous pourrions utiliser de la programmation orientée objet (class) mais ce n'est pas l'idée de cet exercice.
+Nous allons utiliser un dict (dictionnaire)
+Un dict est une structure complexe dans laquelle on définit chacun des champs.
+Cette structure est définie entre acolades { }.
+Dans cette structure on définit différents champs, en précisant leurs noms et leur valeurs.
+
+a. définissez une variable vehicle = { } contenant les champs suivants:
+- "sprite" : le sprite du véhicule
+- "width" : la largeur du véhicule
+- "x" : l'abscisse du véhicule
+- "line" : le numéro de la ligne du véhicule
+- "direction" : la direction du véhicule (D.RIGHT ou D.LEFT)
+- "speed" : la vitesse du véhicule
+Nous n'avons pas besoin de "height" car c'est la taille d'une ligne
+Nous n'avons pas non plus besoin de "y" car c'est le haut d'une ligne
+
+b. modifier la fonction move_car pour qu'elle prenne en entrée vehicle et qu'elle renvoie juste le champ "x" mis à jour.
+Modifier également l'appel pour de la fonction pour que ça fonctionne comme avant.
+
+6.4 Générateur de véhicules
+===========================
+
+A suivre
+
+
 
 6.?: Utiliser un Dict pour définir la route.
 -------
