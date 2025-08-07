@@ -49,7 +49,7 @@ Si la grenouille touche un véhicule, elle meurt.
 Si elle atteint la zone de d'arrivée on a gagné.
 
 Sur chaque ligne, le sens et la vitesse, de la ligne est choisi aléatoirement au démarrage.
-Tous les véhicules d'une méme ligne iront dans ce sens et à cette vitesse.
+Tous les véhicules d'une même ligne iront dans ce sens et à cette vitesse.
 
 Sur une ligne, les véhicules apparaissent aléatoirement.
 La fréquence moyenne d'apparition est également réglable et définie aléatoirement au démarrage.
@@ -167,3 +167,32 @@ pour avoir la valeur 0
  -------------------------------
  Maintenant que ces deux fonctions sont définies, on peut les appeler dans la boucle principale,
  pour obtenir le même résultat qu'avant, mais avec un code beaucoup plus lisible.
+ La dernière étape dz la boucle principame doit être la mise à jour de l'affichage (fond et grenouille)
+ 
+ Etape 6: les véhicules
+ =======
+ 
+ Pour cette étape nous voulons afficher les voitures sur les 4 bandes représentant les routes.
+Nous voulons que les routes aient chacune:
+- un dessin de voiture différente
+- un sens (vers la droite ou vers la gauche) qui lui est propre
+- une vitesse de déplacement des véhicules qui lui est propre (la même pour toutes les véhicules de la ligne)
+- une fréquence moyenne d'apparition des véhicule qui lui est propre (donc différentes pour les autres bandes)
+
+
+6.1: un véhicule
+------
+Nous allons afficher un véhicule se déplaçant sur une route.
+il faut donc charger une image de véhicule à la bonne dimension et receuillir ses nouvelles tailles.
+Stocker ses coordonnées.
+l'afficher à ses coordonnées dans la boucle principale
+
+6.?: Utiliser un Dict pour définir la route.
+-------
+
+Nous allons créer une représentation d'une route, en y notant tous les éléments qui la caractérise:
+- son numéro, "nu", de 1 à 4
+- le "sprite"" de la voiture à utiliser
+- la direction "dir" de valeur D.LEFT ou D.RIGHT
+- la vitesse "speed", un entier
+- la frequence "freq", un entier
